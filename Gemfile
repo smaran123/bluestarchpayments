@@ -25,3 +25,4 @@ gem 'country_select'
 gem "gritter", "1.1.0"
 gem 'signature-pad-rails'
 gem 'bootstrap-datepicker-rails'
+gem 'devise', '~> 3.5.1'
