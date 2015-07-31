@@ -6,7 +6,9 @@
 
 <% @page_title = "Payment" %>
 
-
+<div class="col-md-6 col-md-offset-3">
+  <div class="panel panel-default">
+    <h4>Enter Payment Information</h4>
 
     <%= form_for @payment, :url => payments_path, :method => 'POST', :html => {:id => 'cvvForm'} do |f| %>
 
@@ -64,7 +66,7 @@
 
       <div class="input-group">
         <span class="input-group-addon glyphicon glyphicon-flag"><i class="fa fa-flag"></i></span>
-        <%= f.text_field :country, placeholder: "Country", class: "form-control input-lg required", label: false, prompt: "Select Country" %>
+        <%= f.country_select :country, placeholder: "Country", class: "form-control input-lg required", label: false, prompt: "Select Country" %>
       </div><br/>
 
       <div class="input-group">
@@ -102,6 +104,9 @@
     <%end%>
 
 </div>
+
+</div>
+
     <style>
       .input-group-addon {
         background-color: #eeeeee;
