@@ -1,0 +1,5 @@
+
+<h2> Edit Payment </h2>
+  <%= form_for @payment, :url => payment_path(@payment), :method => 'PUT', :html => {:id => 'cvvForm'} do |f| %>
+<%= render "form" %>
+<%end%>

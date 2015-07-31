@@ -1,0 +1,4 @@
+    <h4>Enter Payment Information</h4>
+    <%= form_for @payment, :url => payments_path, :method => 'POST', :html => {:id => 'cvvForm'} do |f| %>
+    <%= render "form" %>
+    <% end %>
