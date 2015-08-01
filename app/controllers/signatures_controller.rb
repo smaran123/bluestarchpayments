@@ -1,6 +1,10 @@
 class SignaturesController < ApplicationController
 skip_before_filter :authenticate_user!, only: [:create]
 
+def new 
+    @signature = Sign.new
+end
+
   def create
     @signature = Sign.new(signature_params)
 
@@ -8,10 +12,10 @@ skip_before_filter :authenticate_user!, only: [:create]
       @signature.payment.update(is_signed: true, token: generated_token)
 
       # send email with the link to sign the payment
-      PaymentMailer.payment_pdf(@signature.payment).deliver
+      PaymentMailer.payment_pdf(@signature.payment).deliver_now
 
       gflash success: "You have successfully confirm the payment.\n Please check your email"
-      redirect_to thankyou_payment_path(@signature.payment)
+      redirect_to payments_path
     else
       gflash error: @signature.errors.full_messages.join("<br />").html_safe
       redirect_to :back
@@ -25,3 +29,5 @@ private
   end
 
 end
+
+

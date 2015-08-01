@@ -3,11 +3,11 @@ class PaymentMailer < ApplicationMailer
 
   def payment_confirmation(payment)
     @payment = payment
-    mail(to: @payment.email, subject: 'Please confirm payment and sign it')
+    mail(to: payment.email, subject: 'Please confirm payment and sign it')
   end
 
   def payment_pdf(payment)
     @payment = payment
-    mail(to: @payment.email, subject: 'Thankyou, You Payment was confirmed and signed')
+    mail(to: payment.email, subject: 'Thankyou, You Payment was confirmed and signed')
   end
 end

@@ -1,9 +1,11 @@
 class PaymentsController < ApplicationController
  before_action :payment, only: [:payment_pdf, :show, :destroy, :update,:next_step, :thankyou]
- before_action :verify_token, only: [:show, :payment_pdf]
+ #before_action :verify_token, only: [:show, :payment_pdf]
 
  def index
-  @payments = Payment.all
+# @payments = Payment.all
+     @payments = params[:search] ? Payment.search(params[:search]) : Payment.all
+
 end
 
 def new
@@ -16,8 +18,8 @@ def create
   if @payment.save
     gflash success: "Payments was successfully created."
       # send email with the link to sign the payment
-      PaymentMailer.payment_confirmation(@payment).deliver
-      redirect_to next_step_payment_path(@payment)
+      # PaymentMailer.payment_confirmation(@payment).deliver
+      redirect_to payment_url(@payment, signature_token: @payment.token)
     else
       gflash :now, error: @payment.errors.full_messages.join("<br/>").html_safe
       render :new
@@ -31,9 +33,11 @@ def create
   end
 
   def show
+    @signature = Sign.new
   end
 
   def payment_pdf
+        render pdf: "#{@payment.product_name}"
   end
 
   private
@@ -41,5 +45,9 @@ def create
   def payment_params
     params.require(:payment).permit!
   end
-
+  def payment
+    @payment = Payment.find(params[:id])
+  end 
 end
+
+

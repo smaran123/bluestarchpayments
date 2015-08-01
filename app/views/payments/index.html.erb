@@ -5,6 +5,13 @@
 		<div class="panel-heading clearfix">
 			<h4 class="panel-title pull-left" style="padding-top: 7.5px;">
         <strong><%= pluralize Payment.count, "Payment" %></strong>
+        Customer Name:
+  <%= form_tag payments_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+  <% end %>
       </h4>
 
       <div class="btn-group pull-right">
@@ -56,7 +63,7 @@
 							<td><%= payment.card_cvv %> </td>
 							<td><%= payment.card_expiry %> </td>
 							<td>
-								<%= link_to "<i class='glyphicon glyphicon-save'></i>".html_safe, payment_pdf_payment_path(payment, signature_token: payment.token), class: 'btn btn-xs btn-primary', target: "_blank" if payment.is_signed && payment.try(:sign).present? %>
+								<%#= link_to "<i class='glyphicon glyphicon-save'></i>".html_safe, payment_pdf_payment_path(payment, signature_token: payment.token), class: 'btn btn-xs btn-primary', target: "_blank" if payment.is_signed && payment.try(:sign).present? %>
 							</td>
 							<td>
 								<%= link_to "<i class='glyphicon glyphicon-trash'".html_safe, payment_path(payment), method: :delete, data: { confirm: 'Are you sure want to delete?' }, class: 'btn btn-xs btn-danger' %>
@@ -67,7 +74,7 @@
 			</table>
 		</div>
 		<div class="panel-footer">
-			<%= paginate @payments, theme: 'twitter-bootstrap-3' %>
+			<%#= paginate @payments, theme: 'twitter-bootstrap-3' %>
 		</div>
 	</div>
 </div>

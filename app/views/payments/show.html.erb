@@ -27,13 +27,7 @@
             <div class=" col-md-9 col-lg-9 "> 
               <table class="table table-user-information">
                 <tbody>
-                  <tr>
-                    <td>Verified</td>
-                    <td>
-                      <span class="glyphicon glyphicon-<%= @payment.is_signed ? "ok text-success" : "remove text-danger" %>"></span>
-                    </td>
-                  </tr>
-                  <tr>
+                                <tr>
                     <td>Customer Name</td>
                     <td><%= @payment.customer_name %></td>
                   </tr>
@@ -100,7 +94,7 @@
         </div>
 
         <!-- panel footer -->
-        <div class="panel-footer clearfix">
+  <div class="panel-footer clearfix">
           <div class="signature-wrapper">
             <% if @payment.is_signed && @payment.sign.present? %>
               <%= render 'signature' %>
@@ -111,7 +105,7 @@
         </div>
 
         <%= render 'signature_form' %>
-        
+ 
       </div>
     </div>
   </div>
