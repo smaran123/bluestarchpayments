@@ -4,7 +4,14 @@ class PaymentsController < ApplicationController
 
  def index
 # @payments = Payment.all
-     @payments = params[:search] ? Payment.search(params[:search]) : Payment.all
+ # @payments = params[:search] ? Payment.search(params[:search]) : Payment.all
+
+if params[:search]
+    @payments = Payment.search(params[:search]).order("created_at DESC")
+  else
+    @payments = Payment.all.order('created_at DESC')
+  end
+
 
 end
 
@@ -40,11 +47,17 @@ def create
         render pdf: "#{@payment.product_name}"
   end
 
+  def destroy
+    @payment.destroy
+    redirect_to payments_path
+  end  
+
   private
 
   def payment_params
     params.require(:payment).permit!
   end
+
   def payment
     @payment = Payment.find(params[:id])
   end 
