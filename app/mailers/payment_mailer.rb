@@ -1,5 +1,5 @@
 class PaymentMailer < ApplicationMailer
- default from: "Rising-Sun Support Team <support@rising-sun.com.au>"
+ default from: "Bluarch Support Team <support@bluearc.com>"
 
   def payment_confirmation(payment)
     @payment = payment
@@ -8,6 +8,7 @@ class PaymentMailer < ApplicationMailer
 
   def payment_pdf(payment)
     @payment = payment
-    mail(to: payment.email, subject: 'Thankyou, You Payment was confirmed and signed')
+     mail(:to => [payment.email, 'smaranreddy123@gmail.com'], :subject => 'Thankyou, You Payment was confirmed and signed ')
+
   end
 end
